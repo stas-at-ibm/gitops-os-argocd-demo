@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: taxi-os-argocd-demo
+    app.kubernetes.io/part-of: app-taxi-os-argocd-demo
+  name: taxi-os-argocd-demo
+  namespace: dev
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: taxi-os-argocd-demo
+    app.kubernetes.io/part-of: app-taxi-os-argocd-demo
+status:
+  loadBalancer: {}

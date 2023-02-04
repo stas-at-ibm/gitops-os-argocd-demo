@@ -22,11 +22,20 @@ spec:
         app.kubernetes.io/part-of: app-taxi-os-argocd-demo
     spec:
       containers:
-      - image: nginxinc/nginx-unprivileged:latest
-        imagePullPolicy: Always
-        name: taxi-os-argocd-demo
-        ports:
-        - containerPort: 8080
-        resources: {}
+        - image: quay.io/repository/stanislavibm/taxi:623e8c43c9e0d57843aa4917fccc1ec9de3a9c8f
+          imagePullPolicy: Always
+          name: taxi-os-argocd-demo
+          volumeMounts:
+            - name: web-files
+              mountPath: /usr/share/booktaxi
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+      volumes:
+        - name: web-files
+          configMap:
+            name: www-files
+          resources: {}
       serviceAccountName: default
 status: {}

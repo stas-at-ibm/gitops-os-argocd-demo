@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: go-test
+  namespace: default
+spec:
+  resources:
+    inputs:
+      - name: source
+        type: git
+  steps:
+    - name: go-test
+      image: golang:latest
+      command: ["go", "test", "./..."]
